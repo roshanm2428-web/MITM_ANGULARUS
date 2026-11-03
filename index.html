@@ -1,4 +1,4 @@
-  <!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en" ng-app="myApp">
 <head>
     <meta charset="UTF-8">
@@ -8,11 +8,18 @@
      <script src="app.js"></script>
 
 </head>
-<body ng-controller="MyController">
-    <h1>student details</h1>
-    <h2>Hello {{name}} </h2>
-     <h3>update the student name</h3>
-    <input type="text" ng-model="name">
+<body>
     
+<div ng-controller="CollegeController">
+
+<h1>Welcome to {{collegeName}}</h1>
+<hr>
+<div ng-controller="StudentController">
+    <h2>{{name}}</h2>
+    <h3>{{department}}</h3>
+</div>
+<h3>{{department}}</h3>
+    </div>
+
 </body>
 </html>

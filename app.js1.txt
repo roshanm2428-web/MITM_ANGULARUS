@@ -1,0 +1,5 @@
+var app =angular.module('myApp',[]);
+
+app.controller('MyController',function($scope){ 
+    $scope.name ="roshan",$scope.age="18",$scope.semester="3",$scope.department="ise";
+});
