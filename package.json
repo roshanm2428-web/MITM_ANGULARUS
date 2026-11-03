@@ -1,0 +1,24 @@
+{
+  "dependencies": {
+    "angular": "^1.8.3"
+  },
+  "name": "rm",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/roshanm2428-web/MITM_ANGULARUS.git"
+  },
+  "bugs": {
+    "url": "https://github.com/roshanm2428-web/MITM_ANGULARUS/issues"
+  },
+  "homepage": "https://github.com/roshanm2428-web/MITM_ANGULARUS#readme"
+}
