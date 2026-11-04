@@ -18,8 +18,20 @@ app.controller(
         $scope.students =[
             "SG",
             "RAVI",
-            "SACHIN",
+            "SCHIN",
             "HARI",
         ];
+
+//function to add a student ussing ng click
+        $scope.addStudent = function() {
+            if ($scope.name.trim() !==""){
+                $scope.students.push($scope.name);
+                $scope.name = "";
+            }
+            else{
+                alert("Please enter a student name");
+            }
+        };
+        
     }
 );
