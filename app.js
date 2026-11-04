@@ -1,37 +1,20 @@
-var app = angular.module('myApp', []);
+// Student: [Your Name] | Dept: [Your Department]
+var app = angular.module('studentApp', []);
 
-//parent controller
-
+// Parent Controller
 app.controller('CollegeController', function($scope) {
-    $scope.collegeName = "abc college";
+    $scope.collegeName = "Government Engineering College";
 });
 
-//child controller
+// Child Controller
+app.controller('StudentController', function($scope) {
+    $scope.students = ["Aarav", "Priya", "Rohan"];
+    $scope.showDetails = false;
 
-app.controller(
-    "StudentController", function($scope) {
-        $scope.name = "john";
-        $scope.department = "Computer Science";
-        $scope.semester = 3;
-
-        //aray
-        $scope.students =[
-            "SG",
-            "RAVI",
-            "SCHIN",
-            "HARI",
-        ];
-
-//function to add a student ussing ng click
-        $scope.addStudent = function() {
-            if ($scope.name.trim() !==""){
-                $scope.students.push($scope.name);
-                $scope.name = "";
-            }
-            else{
-                alert("Please enter a student name");
-            }
-        };
-        
-    }
-);
+    $scope.addStudent = function() {
+        if ($scope.name) {
+            $scope.students.push($scope.name);
+            $scope.name = "";
+        }
+    };
+});

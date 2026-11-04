@@ -1,46 +1,45 @@
- <!DOCTYPE html>
-<html lang="en" ng-app="myApp">
+<!DOCTYPE html>
+<html ng-app="studentApp">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>First Angular project</title>
-     <script src="node_modules/angular/angular.js"></script>
-     <script src="app.js"></script>
-
+    <title>Student App</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script src="app.js"></script>
+    <style>
+        .pass { color: green; font-weight: bold; }
+        .fail { color: red; font-weight: bold; }
+    </style>
 </head>
-<body>
+<body ng-controller="CollegeController">
 
-    
-    <div ng-controller="CollegeController">
-        <h2>welcome to {{collegeName}}</h2>
-        <hr>
-        <div ng-controller="StudentController">
-            <h2>student registration</h2>
-            <label>student name:</label>
-            <input type="text" ng-model="name">
-            <br><br>
+    <h1>{{ collegeName }}</h1>
 
-            <label>department:</label>
-            <input type="text" ng-model="department">
-            <br><br>
-            <label>semester:</label>
-            <input type="text" ng-model="semester">
-            <hr>
-            <button ng-click="addStudent()">
-                Register Student
-            </button>
+    <div ng-controller="StudentController">
+        <!-- Form Inputs -->
+        <input type="text" ng-model="name" placeholder="Name">
+        <input type="text" ng-model="dept" placeholder="Dept">
+        <input type="text" ng-model="sem" placeholder="Semester">
+        <input type="number" ng-model="marks" placeholder="Marks">
+        
+        <br><br>
+        <button ng-click="addStudent()">Add Student</button>
+        <button ng-click="showDetails = !showDetails">Toggle Details</button>
 
-            <hr>
-
-            <h2>Registered Students</h2>
-
-            <ul>
-                <li ng-repeat="student in students">
-                    {{ student }}
-                </li>
-            </ul>
-
-
+        <!-- Show / Hide Details -->
+        <div ng-show="showDetails">
+            <p>Name: {{ name }} | Dept: {{ dept }} | Sem: {{ sem }}</p>
         </div>
+
+        <!-- Result -->
+        <p ng-if="marks != null" ng-class="{'pass': marks >= 40, 'fail': marks < 40}">
+            Result: {{ marks >= 40 ? 'Pass' : 'Needs Improvement' }} ({{ marks }})
+        </p>
+
+        <!-- Student List -->
+        <h3>Students:</h3>
+        <ul>
+            <li ng-repeat="s in students">{{ s }}</li>
+        </ul>
     </div>
+
+</body>
 </html>
