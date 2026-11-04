@@ -10,16 +10,29 @@
 </head>
 <body>
     
-<div ng-controller="CollegeController">
+<div ng-controller="collegeController">
 
-<h1>Welcome to {{collegeName}}</h1>
+<h2>welcome to {{collegename}}</h2>
 <hr>
-<div ng-controller="StudentController">
-    <h2>{{name}}</h2>
-    <h3>{{department}}</h3>
+<div ng-controller="studentController">
+    <h2>Student registration</h2>
+    <laabel>Student name:</laabel>
+    <input type="text" ng-model="name">
+    <br><br>
+    <laabel>Semester:</laabel>
+    <input type="text" ng-model="semester">
+    <hr>
+    <h3>Student details</h3>
+    <p>Name: {{name}}</p>
+    <p>Department: {{department}}</p>
+    <p>Semester: {{semester}}</p>
+
+    <h2>Student List</h2>
+    <ul> 
+        <li ng-repeat="student in students">{{student}}</li>
+    </ul>
 </div>
-<h3>{{department}}</h3>
     </div>
 
 </body>
-</html>
+</html> 
