@@ -1,45 +1,56 @@
 <!DOCTYPE html>
-<html ng-app="studentApp">
+<html lang="en" ng-app="studentApp">
 <head>
-    <title>Student App</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <meta charset="UTF-8">
+    <title>Student Management</title>
+
+    <script src="node_modules/angular/angular.js"></script>
     <script src="app.js"></script>
-    <style>
-        .pass { color: green; font-weight: bold; }
-        .fail { color: red; font-weight: bold; }
-    </style>
 </head>
-<body ng-controller="CollegeController">
 
-    <h1>{{ collegeName }}</h1>
+<body ng-controller="StudentController">
 
-    <div ng-controller="StudentController">
-        <!-- Form Inputs -->
-        <input type="text" ng-model="name" placeholder="Name">
-        <input type="text" ng-model="dept" placeholder="Dept">
-        <input type="text" ng-model="sem" placeholder="Semester">
-        <input type="number" ng-model="marks" placeholder="Marks">
-        
-        <br><br>
-        <button ng-click="addStudent()">Add Student</button>
-        <button ng-click="showDetails = !showDetails">Toggle Details</button>
+    <h1>Student Management</h1>
 
-        <!-- Show / Hide Details -->
-        <div ng-show="showDetails">
-            <p>Name: {{ name }} | Dept: {{ dept }} | Sem: {{ sem }}</p>
-        </div>
+    <form ng-submit="saveStudent()">
+        <input type="text" ng-model="student.name"
+               placeholder="Student Name" required>
 
-        <!-- Result -->
-        <p ng-if="marks != null" ng-class="{'pass': marks >= 40, 'fail': marks < 40}">
-            Result: {{ marks >= 40 ? 'Pass' : 'Needs Improvement' }} ({{ marks }})
-        </p>
+        <input type="text" ng-model="student.department"
+               placeholder="Department" required>
 
-        <!-- Student List -->
-        <h3>Students:</h3>
-        <ul>
-            <li ng-repeat="s in students">{{ s }}</li>
-        </ul>
-    </div>
+        <button type="submit">
+            {{ student.id ? 'Update Student' : 'Add Student' }}
+        </button>
+
+        <button type="button" ng-click="cancelEdit()"
+                ng-if="student.id">
+            Cancel
+        </button>
+    </form>
+
+    <hr>
+
+    <h2>Student List</h2>
+
+    <table border="1" cellpadding="8">
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Department</th>
+            <th>Actions</th>
+        </tr>
+
+        <tr ng-repeat="s in students">
+            <td>{{ s.id }}</td>
+            <td>{{ s.name }}</td>
+            <td>{{ s.department }}</td>
+            <td>
+                <button ng-click="editStudent(s)">Edit</button>
+                <button ng-click="deleteStudent(s.id)">Delete</button>
+            </td>
+        </tr>
+    </table>
 
 </body>
 </html>

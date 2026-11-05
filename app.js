@@ -1,20 +1,77 @@
-// Student: [Your Name] | Dept: [Your Department]
-var app = angular.module('studentApp', []);
+var app = angular.module("studentApp", []);
 
-// Parent Controller
-app.controller('CollegeController', function($scope) {
-    $scope.collegeName = "Government Engineering College";
-});
+app.controller("StudentController", function ($scope, $http) {
 
-// Child Controller
-app.controller('StudentController', function($scope) {
-    $scope.students = ["Aarav", "Priya", "Rohan"];
-    $scope.showDetails = false;
-
-    $scope.addStudent = function() {
-        if ($scope.name) {
-            $scope.students.push($scope.name);
-            $scope.name = "";
+    var API_URL = "https://tthkxoevukblgjvmvucj.supabase.co";
+    var API_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InR0aGt4b2V2dWtibGdqdm12dWNqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTM3NTgyMTksImV4cCI6MjEwOTMzNDIxOX0.B2FEAcz22wLXroRtLF9DjIyDhwMOnEP9O-jrXm2aDtM"
+    var config = {
+        headers: {
+            "apikey": API_KEY,
+            "Authorization": "Bearer " + API_KEY,
+            "Content-Type": "application/json",
+            "Prefer": "return=representation"
         }
     };
+
+    $scope.students = [];
+    $scope.student = {};
+
+    // READ: Fetch all students
+    $scope.getStudents = function () {
+        $http.get(API_URL + "?select=*", config)
+            .then(function (response) {
+                $scope.students = response.data;
+            });
+    };
+
+    // CREATE: Add a student
+    // UPDATE: Edit an existing student
+    $scope.saveStudent = function () {
+
+        if ($scope.student.id) {
+
+            $http.patch(
+                API_URL + "?id=eq." + $scope.student.id,
+                {
+                    name: $scope.student.name,
+                    department: $scope.student.department
+                },
+                config
+            ).then(function () {
+                $scope.student = {};
+                $scope.getStudents();
+            });
+
+        } else {
+
+            $http.post(API_URL, $scope.student, config)
+                .then(function () {
+                    $scope.student = {};
+                    $scope.getStudents();
+                });
+
+        }
+    };
+
+    // Select a student for editing
+    $scope.editStudent = function (student) {
+        $scope.student = angular.copy(student);
+    };
+
+    // Cancel editing
+    $scope.cancelEdit = function () {
+        $scope.student = {};
+    };
+
+    // DELETE: Remove a student
+    $scope.deleteStudent = function (id) {
+        $http.delete(API_URL + "?id=eq." + id, config)
+            .then(function () {
+                $scope.getStudents();
+            });
+    };
+
+    // Load students when the application starts
+    $scope.getStudents();
+
 });
