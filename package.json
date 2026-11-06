@@ -1,13 +1,13 @@
- package.json
+JSON 
 {
-  "name": "smart-library-management",
+  "name": "smart-library",
   "version": "1.0.0",
-  "dependencies": {
-    "angular": "^1.8.3",
-    "chart.js": "^4.4.1",
-    "@fortawesome/fontawesome-free": "^6.5.1"
-  },
+  "dependencies": "Smart Library Project",
+    
   "scripts": {
-    "start": "npx serve ."
-  }
+    "start": "npx http-server . -p 10000"
+  },
+ "dependencies":{
+  "http-server":"^14.1.1"
+}
 }
